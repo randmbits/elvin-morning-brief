@@ -1,12 +1,13 @@
-**Morning briefing — Oct 05, 2026 13:14 PDT**
+**Morning briefing — Oct 05, 2026 13:34 PDT**
 _sourced from iCloud mail, iCloud calendar, Google Holdings sheet, open-meteo, market_data(Yahoo/CBOE/Treasury) + robinhood guard_
 
 **SCHOOL / DISTRICT**
 &lt;strong&gt;School/district:&lt;/strong&gt; City Hall Improvements Are Underway! for www.FountainValley.org
 
-**Worth reading — 2**
+**Worth reading — 3**
 - Amical's Superpower
 - 😰 Financial Stocks Have Their Worst Month vs the Market in Over 30 Years
+- Amazon Prime Big Deal Days starts tomorrow
 
 **TODAY'S PLATE**
 _Today's plate — 3_
