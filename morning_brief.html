@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Morning Briefing</title>
+<style>
+:root{--bg:#0f1115;--fg:#e6e6e6;--muted:#8b8b8b;--accent:#7c5cff;--border:#2a2a35;--card:#171b24;--pos:#3ddc84;--neg:#ff5c5c}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--fg)}
+header{padding:18px 20px;border-bottom:1px solid var(--border);background:var(--card)}
+h1{margin:0 0 4px;font-size:20px}
+.meta{color:var(--muted);font-size:13px;margin-bottom:12px}
+nav{display:flex;flex-wrap:wrap;gap:8px;padding:12px 20px;border-bottom:1px solid var(--border);background:var(--card)}
+nav button{background:var(--accent);color:#fff;padding:8px 14px;border:none;border-radius:8px;font-size:13px;cursor:pointer}
+nav button:hover{background:#6a4ce0}
+main{padding:16px 20px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:14px}
+.card h2{font-size:15px;margin:0 0 10px;color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.kpi{font-size:22px;font-weight:700}
+.kpi.sub{color:var(--muted);font-size:13px;font-weight:400}
+.pos{color:var(--pos)}.neg{color:var(--neg)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--border)}
+th{background:var(--card);color:var(--muted);font-weight:500}
+tr:nth-child(even) td{background:#1b2029}
+.pos td{color:var(--pos)}.neg td{color:var(--neg)}
+ul{list-style:none;padding:0;margin:0}
+ul li{padding:7px 0;border-bottom:1px solid var(--border);font-size:14px}
+ul li:last-child{border-bottom:none}
+footer{padding:14px 20px;border-top:1px solid var(--border);color:var(--muted);font-size:12px}
+.msg-note{font-size:12px;color:var(--muted);margin-top:6px}
+</style></head>
+<body>
+<header><h1>Morning Briefing &mdash; <span id="date">Oct 05, 2026</span></h1>
+<div class="meta" id="ts"></div></header>
+<nav><button onclick="swapTab('top')">Overview</button>
+<button onclick="swapTab('invest')">Investments</button>
+<button onclick="swapTab('dairy')">School / Mail</button>
+<button onclick="swapTab('plat')">Today's Plate</button>
+<button onclick="swapTab('watch')">Financial Watch</button></nav>
+<main>
+<div class="grid" id="kpi-grid">
+<div class="card"><div class="kpi" id="kpi-mv">$54,021</div><div class="sub">Holdings MV</div></div>
+<div class="card"><div class="kpi" id="kpi-cost">$70,914</div><div class="sub">Cost Basis</div></div>
+<div class="card"><div class="kpi" id="kpi-unreal">$-16,893</div><div class="sub">Unrealized P&amp;L</div></div>
+<div class="card"><div class="kpi" id="kpi-maint">$14,472</div><div class="sub">Margin Maint</div></div>
+<div class="card"><div class="kpi" id="kpi-spx">7774</div><div class="sub">S&amp;P 500</div></div>
+<div class="card"><div class="kpi" id="kpi-nas">27477</div><div class="sub">Nasdaq</div></div>
+<div class="card"><div class="kpi" id="kpi-vix">15.3</div><div class="sub">VIX</div></div>
+<div class="card"><div class="kpi" id="kpi-spread">0.47</div><div class="sub">10Y-2Y Spread</div></div>
+</div>
+<div class="card" id="tab-top">
+<h2>Overview</h2>
+<p><strong>Quick view:</strong> <code>http://192.168.1.219:8080/morning_brief.md</code> (raw text, loads on any device)</p>
+<p><strong>Dashboard:</strong> <code>http://192.168.1.219:8080/morning_brief.html</code> (interactive, on this machine)</p>
+<p class="msg-note">Generate fresh: <code>python3 run_morning_brief.py</code> &mdash; cron runs this daily at 6:00am PDT.</p>
+</div>
+<div class="card" id="tab-invest" style="display:none">
+<h2>Investments</h2>
+<table><thead><tr><th>Ticker</th><th>Shares</th><th>Price</th><th>MV</th><th>Cost Basis</th><th>Unreal P&amp;L</th><th>Maint %</th><th>Maint $</th></tr></thead>
+<tbody id="holdings-body"></tbody></table>
+<p class="msg-note">Total MV <span id="sum-mv">$54,021</span> | Cost <span id="sum-cost">$70,914</span> | Unreal <span id="sum-unreal">$-16,893</span> | Maint <span id="sum-maint">$14,472</span></p>
+</div>
+<div class="card" id="tab-dairy" style="display:none">
+<h2>School / Marketing (skipped)</h2>
+<ul><li id="d-s">none today.</li><li id="d-m"><strong>Marketing (skipped):</strong> Amical&#39;s Superpower<br>😰 Financial Stocks Have Their Worst Month vs the Market in Over 30 Years</li></ul>
+<p class="msg-note">Full inbox: <code>http://192.168.1.219:8080/morning_brief.md</code></p>
+</div>
+<div class="card" id="tab-plat" style="display:none">
+<h2>Today's Plate</h2>
+<ul><li id="e-l"> (no title)<br> (no title)<br> (no title)</li></ul>
+<p class="msg-note">Personal, work, family &amp; Hermes calendars from iCloud (read-only).</p>
+</div>
+<div class="card" id="tab-watch" style="display:none">
+<h2>Financial Watch</h2>
+<p><strong>S&amp;P 500</strong> <span id="w-spx-c">+0.7%</span> &middot; <strong>Nasdaq</strong> <span id="w-nas-c">+1.1%</span></p>
+<p><strong>VIX</strong> <span id="w-vix">15.3</span> (<span id="w-vix-r">calm</span>)</p>
+<p>10Y-2Y <span id="w-spread">0.47</span> <span id="w-spread-flag">not inverted</span><br>
+3M <span id="w-3m">4.22</span> &middot; 2Y <span id="w-2y">4.84</span>
+&middot; 10Y <span id="w-10y">5.31</span> &middot; 30Y <span id="w-30y">5.66</span></p>
+<p class="msg-note">Robinhood margin: <span id="w-mv">$54,065</span> mv,
+<span id="w-equity">$29,848</span> equity,
+<span id="w-maint">$14,813</span> maint req
+(<span id="w-buffer-pct">50.2%</span> buffer).</p>
+</div>
+</main>
+<footer>Generated <span id="gen-time">2026-10-05 13:04:43</span> &middot; iCloud mail/calendar, Google Holdings sheet, open-meteo, Yahoo Finance / CBOE / Treasury, Robinhood screenshots.</footer>
+<script>
+function swapTab(t){["top","invest","dairy","plat","watch"].forEach(k=>{document.getElementById("tab-"+k).style.display=(k===t?"block":"none")})};
+</script>
+</body></html>"""
