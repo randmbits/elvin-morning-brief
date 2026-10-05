@@ -1,61 +1,71 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Morning Briefing</title>
 <style>
-:root{--bg:#0f1115;--fg:#e6e6e6;--muted:#8b8b8b;--accent:#7c5cff;--border:#2a2a35;--card:#171b24}
+:root{--bg:#0f1115;--fg:#e6e6e6;--muted:#8b8b8b;--accent:#7c5cff;--border:#2a2a35;--card:#171b24;--pos:#3ddc84;--neg:#ff5c5c}
 *{box-sizing:border-box}
 body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--fg)}
 header{padding:18px 20px;border-bottom:1px solid var(--border);background:var(--card)}
 h1{margin:0 0 4px;font-size:20px}
 .meta{color:var(--muted);font-size:13px;margin-bottom:12px}
-main{padding:20px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px}
+main{padding:16px 20px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:14px}
 .card h2{font-size:15px;margin:0 0 10px;color:var(--accent)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-.kpi{font-size:22px;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.kpi{font-size:20px;font-weight:700}
 .kpi .sub{color:var(--muted);font-size:13px;font-weight:400}
-a{color:var(--accent)}
+.pos{color:var(--pos)}.neg{color:var(--neg)}
+ul{list-style:none;padding:0;margin:0}
+ul li{padding:7px 0;border-bottom:1px solid var(--border);font-size:14px}
+ul li:last-child{border-bottom:none}
+footer{padding:14px 20px;border-top:1px solid var(--border);color:var(--muted);font-size:12px}
 </style></head>
 <body>
 <header><h1>Morning Briefing</h1>
-<div class="meta" id="ts"></div></header>
+<div class="meta" id="ts">2026-10-05 14:46:36 PDT</div></header>
 <main>
 <div class="card">
-<h2>Morning Briefing — Fast View</h2>
+<h2>Overview</h2>
 <p>The full interactive dashboard is <strong><a href="/morning_brief.html">morning_brief.html</a></strong>.</p>
-<p class="meta">Generated: <span id="gen"></span></p>
-<p>This site is a static GitHub Pages site. The briefing is generated daily at 6:00am PDT by a
-cron job on the Pi and pushed here automatically.</p>
+<p class="meta">Generated 2026-10-05 14:46:36 PDT · iCloud mail/calendar, Google Holdings sheet, open-meteo, Yahoo Finance / CBOE / Treasury, Robinhood screenshots.</p>
 </div>
+
 <div class="card">
-<h2>Today at a glance</h2>
+<h2>Market Watch</h2>
 <div class="grid">
-<div class="kpi">S&amp;P 500 <span id="spx"></span></div>
-<div class="kpi">Nasdaq <span id="nas"></span></div>
-<div class="kpi">VIX <span id="vix"></span></div>
-<div class="kpi">Holdings MV <span id="mv"></span></div>
+<div class="kpi">S&P 500 <span id="spx">7,774</span></div>
+<div class="kpi">S&P 500 <span id="spx-c">+0.7%</span></div>
+<div class="kpi">Nasdaq <span id="nas">27,477</span></div>
+<div class="kpi">Nasdaq <span id="nas-c">+1.1%</span></div>
+<div class="kpi">VIX <span id="vix">15.3</span></div>
+<div class="kpi">10Y-2Y <span id="spread">0.47</span></div>
 </div>
-<p class="meta">Market data via Yahoo Finance / CBOE / Treasury. Holdings from your Google Sheet.</p>
 </div>
+
+<div class="card">
+<h2>Holdings</h2>
+<div class="grid">
+<div class="kpi">MV <span id="mv">$54,021</span></div>
+<div class="kpi">Cost <span id="cost">$70,914</span></div>
+<div class="kpi">Unreal <span id="unreal">$-16,893</span></div>
+<div class="kpi">Maint <span id="maint">$14,472</span></div>
+</div>
+</div>
+
+<div class="card">
+<h2>Weather · Fountain Valley</h2>
+<p>Today <strong>101/74F</strong> / <strong>today,</strong></p>
+</div>
+
 <div class="card">
 <h2>Quick links</h2>
 <ul style="list-style:none;padding:0">
 <li><a href="/morning_brief.html">Full dashboard (HTML)</a></li>
 <li><a href="/morning_brief.md">Full briefing (plain text)</a></li>
-<li><a href="https://github.com/randmbits/elvin-morning-brief">View on GitHub</a></li>
+<li><a href="/morning_brief.html">Investments (table)</a></li>
 </ul>
 </div>
 </main>
-<script>
-fetch("/morning_brief.html").then(r=>r.text()).then(t=>{
-  const g=(id)=>{const e=document.getElementById(id);if(e){const m=t.match(new RegExp('id="'+id+'["'][^>]*>([^<]*)'));if(m)e.textContent=m[1]||"?";}};
-  g("spx"); g("nas"); g("vix"); g("mv");
-  document.getElementById("ts").textContent = "Page loaded " + new Date().toLocaleString();
-  document.getElementById("gen").textContent = "HTML generated <span id='gtime'></span>";
-});
-</script>
-</body>
-</html>
+<footer>Generated 2026-10-05 14:46:36 PDT &middot; iCloud mail/calendar, Google Holdings sheet, open-meteo, Yahoo Finance / CBOE / Treasury, Robinhood screenshots.</footer>
+</body></html>

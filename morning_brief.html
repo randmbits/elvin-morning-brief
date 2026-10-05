@@ -1,7 +1,5 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Morning Briefing</title>
 <style>
@@ -19,7 +17,7 @@ main{padding:16px 20px}
 .card h2{font-size:15px;margin:0 0 10px;color:var(--accent)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
 .kpi{font-size:22px;font-weight:700}
-.kpi.sub{color:var(--muted);font-size:13px;font-weight:400}
+.kpi .sub{color:var(--muted);font-size:13px;font-weight:400}
 .pos{color:var(--pos)}.neg{color:var(--neg)}
 table{width:100%;border-collapse:collapse;font-size:13px}
 th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--border)}
@@ -34,60 +32,55 @@ footer{padding:14px 20px;border-top:1px solid var(--border);color:var(--muted);f
 </style></head>
 <body>
 <header><h1>Morning Briefing &mdash; <span id="date">Oct 05, 2026</span></h1>
-<div class="meta" id="ts"></div></header>
-<nav><button onclick="swapTab('top')">Overview</button>
+<div class="meta" id="ts">2026-10-05 14:46:36 PDT</div></header>
+<nav>
+<button onclick="swapTab('top')">Overview</button>
 <button onclick="swapTab('invest')">Investments</button>
 <button onclick="swapTab('dairy')">School / Mail</button>
 <button onclick="swapTab('plat')">Today's Plate</button>
-<button onclick="swapTab('watch')">Financial Watch</button></nav>
+<button onclick="swapTab('watch')">Financial Watch</button>
+</nav>
 <main>
 <div class="grid" id="kpi-grid">
-<div class="card"><div class="kpi" id="kpi-mv">$54,021</div><div class="sub">Holdings MV</div></div>
-<div class="card"><div class="kpi" id="kpi-cost">$70,914</div><div class="sub">Cost Basis</div></div>
-<div class="card"><div class="kpi" id="kpi-unreal">$-16,893</div><div class="sub">Unrealized P&amp;L</div></div>
-<div class="card"><div class="kpi" id="kpi-maint">$14,472</div><div class="sub">Margin Maint</div></div>
-<div class="card"><div class="kpi" id="kpi-spx">7774</div><div class="sub">S&amp;P 500</div></div>
-<div class="card"><div class="kpi" id="kpi-nas">27477</div><div class="sub">Nasdaq</div></div>
-<div class="card"><div class="kpi" id="kpi-vix">15.3</div><div class="sub">VIX</div></div>
-<div class="card"><div class="kpi" id="kpi-spread">0.47</div><div class="sub">10Y-2Y Spread</div></div>
+<div class='card'><div class='kpi' id='kpi-mv'>$54,021</div><div class='sub'>Holdings MV</div></div><div class='card'><div class='kpi' id='kpi-cost'>$70,914</div><div class='sub'>Cost Basis</div></div><div class='card'><div class='kpi' id='kpi-unreal'>$-16,893</div><div class='sub'>Unrealized P&L</div></div><div class='card'><div class='kpi' id='kpi-maint'>$14,472</div><div class='sub'>Margin Maint</div></div><div class='card'><div class='kpi' id='kpi-spx'>7774</div><div class='sub'>S&P 500</div></div><div class='card'><div class='kpi' id='kpi-nas'>27477</div><div class='sub'>Nasdaq</div></div><div class='card'><div class='kpi' id='kpi-vix'>15.3</div><div class='sub'>VIX</div></div><div class='card'><div class='kpi' id='kpi-spread'>0.47</div><div class='sub'>10Y-2Y Spread</div></div>
 </div>
 <div class="card" id="tab-top">
 <h2>Overview</h2>
-<p><strong>Quick view:</strong> <code>http://192.168.1.219:8080/morning_brief.md</code> (raw text, loads on any device)</p>
-<p><strong>Dashboard:</strong> <code>http://192.168.1.219:8080/morning_brief.html</code> (interactive, on this machine)</p>
-<p class="msg-note">Generate fresh: <code>python3 run_morning_brief.py</code> &mdash; cron runs this daily at 6:00am PDT.</p>
+<p><strong>Holdings MV</strong> <span id="mv">$54,021</span></p>
+<p><strong>Cost Basis</strong> <span id="cost">$70,914</span></p>
+<p><strong>Unrealized P&L</strong> <span id="unreal">$-16,893</span></p>
+<p><strong>Margin Maint</strong> <span id="maint">$14,472</span></p>
+<p><strong>Market</strong> S&P 500 +0.7% &middot; Nasdaq +1.1% &middot; VIX 15.3</p>
+<p><strong>10Y-2Y</strong> 0.47 not inverted</p>
 </div>
 <div class="card" id="tab-invest" style="display:none">
 <h2>Investments</h2>
-<table><thead><tr><th>Ticker</th><th>Shares</th><th>Price</th><th>MV</th><th>Cost Basis</th><th>Unreal P&amp;L</th><th>Maint %</th><th>Maint $</th></tr></thead>
-<tbody id="holdings-body"></tbody></table>
+<table><thead><tr><th>Ticker</th><th>Shares</th><th>Price</th><th>MV</th><th>Cost Basis</th><th>Unreal P&L</th><th>Maint %</th><th>Maint $</th></tr></thead>
+<tbody id="holdings-body"><tr class='neg'><td>PDI</td><td>390.00</td><td>$14.42</td><td>$5,624</td><td>$7,394</td><td class='neg'>$-1,771</td><td>25%</td><td>$1,406</td></tr><tr class='pos'><td>SPYG</td><td>40.00</td><td>$124.61</td><td>$4,984</td><td>$4,452</td><td class='pos'>$533</td><td>25%</td><td>$1,246</td></tr><tr class='neg'><td>QQQY</td><td>171.00</td><td>$22.71</td><td>$3,883</td><td>$3,889</td><td class='neg'>$-5</td><td>25%</td><td>$971</td></tr><tr class='neg'><td>XDTE</td><td>101.00</td><td>$38.43</td><td>$3,881</td><td>$3,910</td><td class='neg'>$-28</td><td>25%</td><td>$970</td></tr><tr class='neg'><td>BTCI</td><td>99.00</td><td>$33.93</td><td>$3,359</td><td>$5,535</td><td class='neg'>$-2,176</td><td>25%</td><td>$840</td></tr><tr class='neg'><td>OXLC</td><td>365.00</td><td>$8.93</td><td>$3,259</td><td>$8,935</td><td class='neg'>$-5,676</td><td>25%</td><td>$815</td></tr><tr class='neg'><td>CRF</td><td>515.00</td><td>$6.12</td><td>$3,152</td><td>$3,404</td><td class='neg'>$-252</td><td>25%</td><td>$788</td></tr><tr class='neg'><td>AMZN</td><td>12.00</td><td>$251.53</td><td>$3,018</td><td>$3,048</td><td class='neg'>$-30</td><td>25%</td><td>$755</td></tr><tr class='neg'><td>IWMI</td><td>61.00</td><td>$49.47</td><td>$3,018</td><td>$3,187</td><td class='neg'>$-169</td><td>25%</td><td>$754</td></tr><tr class='neg'><td>GOOG</td><td>8.00</td><td>$340.43</td><td>$2,723</td><td>$2,789</td><td class='neg'>$-66</td><td>25%</td><td>$681</td></tr><tr class='neg'><td>CLM</td><td>425.00</td><td>$6.39</td><td>$2,716</td><td>$2,762</td><td class='neg'>$-47</td><td>25%</td><td>$679</td></tr><tr class='neg'><td>MAIN</td><td>40.00</td><td>$55.15</td><td>$2,206</td><td>$2,218</td><td class='neg'>$-12</td><td>25%</td><td>$552</td></tr><tr class='pos'><td>QQQI</td><td>37.00</td><td>$56.10</td><td>$2,076</td><td>$2,031</td><td class='pos'>$45</td><td>25%</td><td>$519</td></tr><tr class='neg'><td>MSTY</td><td>88.00</td><td>$16.37</td><td>$1,441</td><td>$8,189</td><td class='neg'>$-6,749</td><td>35%</td><td>$504</td></tr><tr class='neg'><td>RDTE</td><td>41.00</td><td>$26.56</td><td>$1,089</td><td>$1,176</td><td class='neg'>$-87</td><td>25%</td><td>$272</td></tr><tr class='neg'><td>CHPY</td><td>14.00</td><td>$71.63</td><td>$1,003</td><td>$1,093</td><td class='neg'>$-90</td><td>25%</td><td>$251</td></tr><tr class='pos'><td>SPIY</td><td>18.00</td><td>$53.59</td><td>$965</td><td>$952</td><td class='pos'>$13</td><td>25%</td><td>$241</td></tr><tr class='neg'><td>COST</td><td>1.00</td><td>$920.97</td><td>$921</td><td>$1,006</td><td class='neg'>$-85</td><td>25%</td><td>$230</td></tr><tr class='pos'><td>TQQQ</td><td>11.00</td><td>$81.00</td><td>$891</td><td>$549</td><td class='pos'>$342</td><td>75%</td><td>$668</td></tr><tr class='pos'><td>UPRO</td><td>5.00</td><td>$150.89</td><td>$754</td><td>$626</td><td class='pos'>$128</td><td>75%</td><td>$566</td></tr><tr class='neg'><td>AAAU</td><td>18.00</td><td>$40.87</td><td>$736</td><td>$798</td><td class='neg'>$-62</td><td>25%</td><td>$184</td></tr><tr class='neg'><td>SIVR</td><td>11.00</td><td>$57.58</td><td>$633</td><td>$717</td><td class='neg'>$-83</td><td>25%</td><td>$158</td></tr><tr class='neg'><td>GDXY</td><td>61.00</td><td>$9.99</td><td>$609</td><td>$1,038</td><td class='neg'>$-428</td><td>25%</td><td>$152</td></tr><tr class='neg'><td>MLPI</td><td>11.00</td><td>$51.19</td><td>$563</td><td>$584</td><td class='neg'>$-20</td><td>25%</td><td>$141</td></tr><tr class='neg'><td>IAUI</td><td>4.00</td><td>$48.13</td><td>$193</td><td>$235</td><td class='neg'>$-42</td><td>25%</td><td>$48</td></tr><tr class='neg'><td>GOF</td><td>21.00</td><td>$8.73</td><td>$183</td><td>$244</td><td class='neg'>$-61</td><td>25%</td><td>$46</td></tr><tr class='neg'><td>ECAT</td><td>10.00</td><td>$13.99</td><td>$140</td><td>$154</td><td class='neg'>$-14</td><td>25%</td><td>$35</td></tr></tbody></table>
 <p class="msg-note">Total MV <span id="sum-mv">$54,021</span> | Cost <span id="sum-cost">$70,914</span> | Unreal <span id="sum-unreal">$-16,893</span> | Maint <span id="sum-maint">$14,472</span></p>
 </div>
 <div class="card" id="tab-dairy" style="display:none">
-<h2>School / Marketing (skipped)</h2>
-<ul><li id="d-s">none today.</li><li id="d-m"><strong>Marketing (skipped):</strong> Amical&#39;s Superpower<br>😰 Financial Stocks Have Their Worst Month vs the Market in Over 30 Years</li></ul>
-<p class="msg-note">Full inbox: <code>http://192.168.1.219:8080/morning_brief.md</code></p>
+<h2>School / Mail</h2>
+<ul><li id="d-s"><strong>School/district:</strong> City Hall Improvements Are Underway! for www.FountainValley.org</li><li id="d-m"><strong>Marketing (skipped):</strong> Amical's Superpower<br>😰 Financial Stocks Have Their Worst Month vs the Market in Over 30 Years</li></ul>
 </div>
 <div class="card" id="tab-plat" style="display:none">
 <h2>Today's Plate</h2>
-<ul><li id="e-l"> (no title)<br> (no title)<br> (no title)</li></ul>
-<p class="msg-note">Personal, work, family &amp; Hermes calendars from iCloud (read-only).</p>
+<ul><li id="e-l"><li> (no title)</li><li> (no title)</li><li> (no title)</li></li></ul>
 </div>
 <div class="card" id="tab-watch" style="display:none">
 <h2>Financial Watch</h2>
-<p><strong>S&amp;P 500</strong> <span id="w-spx-c">+0.7%</span> &middot; <strong>Nasdaq</strong> <span id="w-nas-c">+1.1%</span></p>
-<p><strong>VIX</strong> <span id="w-vix">15.3</span> (<span id="w-vix-r">calm</span>)</p>
-<p>10Y-2Y <span id="w-spread">0.47</span> <span id="w-spread-flag">not inverted</span><br>
-3M <span id="w-3m">4.22</span> &middot; 2Y <span id="w-2y">4.84</span>
-&middot; 10Y <span id="w-10y">5.31</span> &middot; 30Y <span id="w-30y">5.66</span></p>
+<p><strong>S&P 500</strong> +0.7% &middot; <strong>Nasdaq</strong> +1.1%</p>
+<p><strong>VIX</strong> 15.3 (calm)</p>
+<p><strong>10Y-2Y</strong> 0.47 <span id="spread-flag">not inverted</span><br>
+3M 4.22% &middot; 2Y 4.84% &middot; 10Y 5.31% &middot; 30Y 5.66%</p>
 <p class="msg-note">Robinhood margin: <span id="w-mv">$54,065</span> mv,
 <span id="w-equity">$29,848</span> equity,
 <span id="w-maint">$14,813</span> maint req
-(<span id="w-buffer-pct">50.2%</span> buffer).</p>
+(<span id="w-buffer">50.2%</span> buffer).</p>
 </div>
 </main>
-<footer>Generated <span id="gen-time">2026-10-05 13:04:43</span> &middot; iCloud mail/calendar, Google Holdings sheet, open-meteo, Yahoo Finance / CBOE / Treasury, Robinhood screenshots.</footer>
+<footer>Generated 2026-10-05 14:46:36 PDT &middot; iCloud mail/calendar, Google Holdings sheet, open-meteo, Yahoo Finance / CBOE / Treasury, Robinhood screenshots.</footer>
 <script>
-function swapTab(t){["top","invest","dairy","plat","watch"].forEach(k=>{document.getElementById("tab-"+k).style.display=(k===t?"block":"none")})};
+function swapTab(t){["top","invest","dairy","plat","watch"].forEach(k=>{document.getElementById("tab-"+k).style.display=(k===t?"block":"none")});};
 </script>
-</body></html>"""
+</body></html>
