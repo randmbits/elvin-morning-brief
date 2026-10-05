@@ -1,71 +1,201 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8">
+<html lang="en">
+<head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Morning Briefing</title>
 <style>
-:root{--bg:#0f1115;--fg:#e6e6e6;--muted:#8b8b8b;--accent:#7c5cff;--border:#2a2a35;--card:#171b24;--pos:#3ddc84;--neg:#ff5c5c}
-*{box-sizing:border-box}
-body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--fg)}
-header{padding:18px 20px;border-bottom:1px solid var(--border);background:var(--card)}
-h1{margin:0 0 4px;font-size:20px}
-.meta{color:var(--muted);font-size:13px;margin-bottom:12px}
-main{padding:16px 20px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:14px}
-.card h2{font-size:15px;margin:0 0 10px;color:var(--accent)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-.kpi{font-size:20px;font-weight:700}
-.kpi .sub{color:var(--muted);font-size:13px;font-weight:400}
-.pos{color:var(--pos)}.neg{color:var(--neg)}
-ul{list-style:none;padding:0;margin:0}
-ul li{padding:7px 0;border-bottom:1px solid var(--border);font-size:14px}
-ul li:last-child{border-bottom:none}
-footer{padding:14px 20px;border-top:1px solid var(--border);color:var(--muted);font-size:12px}
-</style></head>
+/* Landing page (index.html) styles - plain text, no f-string, no braces issues */
+:root {
+  --bg: #f6f5f1;
+  --surface: #ffffff;
+  --surface-2: #f0eeee;
+  --border: #d9d7d0;
+  --border-strong: #b9b6ad;
+  --text: #1a1917;
+  --muted: #6b6860;
+  --accent: #2d3e6e;
+  --accent-soft: #e8e6f0;
+  --pos: #2e7d32;
+  --neg: #c62828;
+  --kpi-border: #e0dfda;
+  --radius: 10px;
+  --font: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --mono: 'SF Mono', 'Consolas', 'Liberation Mono', monospace;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.55;
+}
+a { color: var(--accent); }
+a:hover { color: #1a2a50; }
+
+header {
+  padding: 2rem 1.5rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+header h1 {
+  margin: 0 0 0.25rem;
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+header .meta {
+  color: var(--muted);
+  font-size: 1rem;
+  margin: 0;
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem 2rem;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.3rem 1.5rem;
+  margin-bottom: 1.2rem;
+}
+.card h2 {
+  margin: 0 0 0.8rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+.card p { margin: 0.4rem 0; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1rem;
+}
+.kpi {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+.kpi .label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.kpi .value {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--text);
+  font-family: var(--mono);
+  margin-top: 0.2rem;
+}
+.weather {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: var(--accent-soft);
+  border-radius: var(--radius);
+}
+.weather .hi {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+.weather .lo { font-size: 1.3rem; color: var(--muted); }
+.weather .cty { font-size: 1.6rem; font-weight: 700; }
+
+ul.plain {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+ul.plain li {
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 1rem;
+}
+ul.plain li:last-child { border-bottom: none; }
+
+footer {
+  padding: 1.5rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.9rem;
+  background: var(--surface);
+  text-align: center;
+}
+footer a { color: var(--accent); }
+
+@media (max-width: 768px) {
+  header h1 { font-size: 1.7rem; }
+  main { padding: 0 1rem 1.5rem; }
+  .grid { grid-template-columns: 1fr; }
+}
+
+</style>
+</head>
 <body>
-<header><h1>Morning Briefing</h1>
-<div class="meta" id="ts">2026-10-05 14:46:36 PDT</div></header>
+<header>
+  <h1>Morning Briefing</h1>
+  <p class="meta">2026-10-05 15:02:39 PDT</p>
+</header>
+
 <main>
-<div class="card">
-<h2>Overview</h2>
-<p>The full interactive dashboard is <strong><a href="/morning_brief.html">morning_brief.html</a></strong>.</p>
-<p class="meta">Generated 2026-10-05 14:46:36 PDT · iCloud mail/calendar, Google Holdings sheet, open-meteo, Yahoo Finance / CBOE / Treasury, Robinhood screenshots.</p>
-</div>
+  <div class="card">
+    <h2>Overview</h2>
+    <p>This is the family morning briefing. See the <a href="/morning_brief.html">full interactive dashboard</a> for market data, holdings, school/mail, today's schedule, and financial watch.</p>
+  </div>
 
-<div class="card">
-<h2>Market Watch</h2>
-<div class="grid">
-<div class="kpi">S&P 500 <span id="spx">7,774</span></div>
-<div class="kpi">S&P 500 <span id="spx-c">+0.7%</span></div>
-<div class="kpi">Nasdaq <span id="nas">27,477</span></div>
-<div class="kpi">Nasdaq <span id="nas-c">+1.1%</span></div>
-<div class="kpi">VIX <span id="vix">15.3</span></div>
-<div class="kpi">10Y-2Y <span id="spread">0.47</span></div>
-</div>
-</div>
+  <div class="card">
+    <h2>Market Watch</h2>
+    <div class="grid">
+      <div class="kpi"><div class="label">S&P 500</div><div class="value">7,774</div><div class="label" style="color:var(--pos)">+0.7%</div></div>
+      <div class="kpi"><div class="label">Nasdaq</div><div class="value">27,477</div><div class="label" style="color:var(--pos)">+1.1%</div></div>
+      <div class="kpi"><div class="label">VIX</div><div class="value">15.3</div><div class="label" style="color:var(--muted)">calm</div></div>
+      <div class="kpi"><div class="label">10Y-2Y</div><div class="value">0.47</div><div class="label" style="color:var(--pos)">not inverted</div></div>
+    </div>
+  </div>
 
-<div class="card">
-<h2>Holdings</h2>
-<div class="grid">
-<div class="kpi">MV <span id="mv">$54,021</span></div>
-<div class="kpi">Cost <span id="cost">$70,914</span></div>
-<div class="kpi">Unreal <span id="unreal">$-16,893</span></div>
-<div class="kpi">Maint <span id="maint">$14,472</span></div>
-</div>
-</div>
+  <div class="card">
+    <h2>Holdings</h2>
+    <div class="grid">
+      <div class="kpi"><div class="label">Market Value</div><div class="value">$54,021</div></div>
+      <div class="kpi"><div class="label">Cost Basis</div><div class="value">$70,914</div></div>
+      <div class="kpi"><div class="label">Unrealized P&amp;L</div><div class="value">$-16,893</div></div>
+      <div class="kpi"><div class="label">Margin Maint</div><div class="value">$14,472</div></div>
+    </div>
+  </div>
 
-<div class="card">
-<h2>Weather · Fountain Valley</h2>
-<p>Today <strong>101/74F</strong> / <strong>today,</strong></p>
-</div>
+  <div class="card">
+    <h2>Weather · Fountain Valley</h2>
+    <div class="weather">
+      <div class="cty">Fountain Valley</div>
+      <div class="hi">99/71F</div>
+      <div class="lo">Tomorrow · high / low</div>
+    </div>
+  </div>
 
-<div class="card">
-<h2>Quick links</h2>
-<ul style="list-style:none;padding:0">
-<li><a href="/morning_brief.html">Full dashboard (HTML)</a></li>
-<li><a href="/morning_brief.md">Full briefing (plain text)</a></li>
-<li><a href="/morning_brief.html">Investments (table)</a></li>
-</ul>
-</div>
+  <div class="card">
+    <h2>Quick links</h2>
+    <ul class="plain">
+      <li><a href="/morning_brief.html">Full dashboard (HTML, interactive)</a></li>
+      <li><a href="/morning_brief.md">Full briefing (plain text)</a></li>
+      <li><a href="https://github.com/randmbits/elvin-morning-brief">Source on GitHub</a></li>
+    </ul>
+  </div>
 </main>
-<footer>Generated 2026-10-05 14:46:36 PDT &middot; iCloud mail/calendar, Google Holdings sheet, open-meteo, Yahoo Finance / CBOE / Treasury, Robinhood screenshots.</footer>
-</body></html>
+
+<footer>
+  Generated 2026-10-05 15:02:39 PDT &middot; Source: iCloud mail/calendar, Google Holdings sheet, open-meteo, Yahoo Finance / CBOE / Treasury, Robinhood screenshots.
+</footer>
+</body>
+</html>
